@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PostCard from "../components/blog/PostCard.astro";
+
+const posts = (await Astro.glob("./posts/*.{md,mdx}")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+
+<Layout>
+  <div class="container mx-auto max-w-3xl my-10">
+    <div class="space-y-14">
+      {
+        posts.map((post) => (
+          <PostCard
+            title={post.frontmatter.title}
+            pubDate={post.frontmatter.pubDate}
+            body={post}
+            author="Leonid Lezner"
+            Content={post.Content}
+            categories={post.frontmatter.categories}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Layout>

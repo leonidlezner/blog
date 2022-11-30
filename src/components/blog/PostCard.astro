@@ -1,0 +1,16 @@
+---
+const { title, Content, author, categories } = Astro.props;
+---
+
+<article class="">
+  <h2 class="text-4xl font-bold mb-7">{title}</h2>
+  <div class="mb-7 text-gray-600">
+    Posted by <span class="font-semibold">{author}</span>
+    {
+      categories
+        ? categories.map((category: string) => <li>{category}</li>)
+        : ""
+    }
+  </div>
+  <div class="prose prose-xl max-w-none"><Content /></div>
+</article>
