@@ -11,12 +11,10 @@ interface Props {
 }
 
 const { title, Content, author, categories, pubDate } = Astro.props;
-
-console.log(pubDate);
 ---
 
 <article class="">
   <h2 class="text-4xl font-bold mb-7">{title}</h2>
   <PostMeta author={author} categories={categories} pubDate={pubDate} />
-  <div class="prose prose-xl max-w-none"><Content /></div>
+  <div class="prose prose-xl max-w-none font-serif"><Content /></div>
 </article>

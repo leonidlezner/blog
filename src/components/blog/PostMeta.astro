@@ -1,6 +1,7 @@
 ---
 import Categories from "./Categories.astro";
 import DateString from "./DateString.astro";
+import Newspaper from "astro-heroicons/outline/Newspaper.astro";
 
 interface Props {
   author: string;
@@ -11,7 +12,8 @@ interface Props {
 const { author, categories, pubDate } = Astro.props;
 ---
 
-<div class="mb-7 text-gray-600 flex space-x-1 flex-wrap">
+<div class="mb-7 text-gray-600 flex space-x-1 flex-wrap items-center">
+  <Newspaper class="w-5 h-5" />
   <div>Gepostet von <span class="font-semibold">{author}</span></div>
   {
     categories && (
