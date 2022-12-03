@@ -1,12 +1,10 @@
 ---
 import PostListing from "../../components/blog/PostListing.astro";
-import Layout from "../../layouts/Layout.astro";
+import ListLayout from "../../layouts/ListLayout.astro";
 
 const posts = await Astro.glob("../../posts/home/*.{md,mdx}");
 ---
 
-<Layout title="Privater Kram von Leonid" area="home">
-  <div class="container mx-auto max-w-3xl my-10">
-    <PostListing posts={posts} path="/home" />
-  </div>
-</Layout>
+<ListLayout title="Privater Kram von Leonid" area="home">
+  <PostListing posts={posts} path="/home" />
+</ListLayout>

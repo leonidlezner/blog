@@ -1,0 +1,10 @@
+---
+import PostListing from "../../components/blog/PostListing.astro";
+import ListLayout from "../../layouts/ListLayout.astro";
+
+const posts = await Astro.glob("../../posts/work/*.{md,mdx}");
+---
+
+<ListLayout title="Privater Kram von Leonid" area="work">
+  <PostListing posts={posts} path="/work" />
+</ListLayout>
