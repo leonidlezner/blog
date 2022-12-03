@@ -2,6 +2,7 @@
 import PostLayout from "../../layouts/PostLayout.astro";
 import PostMeta from "./PostMeta.astro";
 import Settings from "../../settings.json";
+import ContentContainer from "./ContentContainer.astro";
 
 const { post, area } = Astro.props;
 ---
@@ -12,10 +13,12 @@ const { post, area } = Astro.props;
       {post.frontmatter.title}
     </h1>
     <PostMeta
-      author={Settings.author}
       categories={post.frontmatter.categories}
       pubDate={post.frontmatter.pubDate}
+      readingTime={post.frontmatter.readingTime}
     />
-    <div class="prose prose-xl max-w-none font-serif"><post.Content /></div>
+    <ContentContainer>
+      <post.Content />
+    </ContentContainer>
   </article>
 </PostLayout>
