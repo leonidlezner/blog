@@ -1,0 +1,19 @@
+---
+interface Props {
+  categories: string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<ul class="comma-list">
+  {
+    categories.map((category: string) => (
+      <li>
+        <a href="/" class="bg-gray-100">
+          {category}
+        </a>
+      </li>
+    ))
+  }
+</ul>

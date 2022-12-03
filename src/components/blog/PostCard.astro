@@ -1,16 +1,22 @@
 ---
-const { title, Content, author, categories } = Astro.props;
+import type { AstroComponentFactory } from "astro/dist/runtime/server";
+import PostMeta from "./PostMeta.astro";
+
+interface Props {
+  title: string;
+  author: string;
+  categories: string[];
+  Content: AstroComponentFactory;
+  pubDate?: string | undefined;
+}
+
+const { title, Content, author, categories, pubDate } = Astro.props;
+
+console.log(pubDate);
 ---
 
 <article class="">
   <h2 class="text-4xl font-bold mb-7">{title}</h2>
-  <div class="mb-7 text-gray-600">
-    Posted by <span class="font-semibold">{author}</span>
-    {
-      categories
-        ? categories.map((category: string) => <li>{category}</li>)
-        : ""
-    }
-  </div>
+  <PostMeta author={author} categories={categories} pubDate={pubDate} />
   <div class="prose prose-xl max-w-none"><Content /></div>
 </article>

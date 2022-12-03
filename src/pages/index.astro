@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PostCard from "../components/blog/PostCard.astro";
+import Settings from "../settings.json";
 
 const posts = (await Astro.glob("./posts/*.{md,mdx}")).sort(
   (a, b) =>
@@ -17,8 +18,7 @@ const posts = (await Astro.glob("./posts/*.{md,mdx}")).sort(
           <PostCard
             title={post.frontmatter.title}
             pubDate={post.frontmatter.pubDate}
-            body={post}
-            author="Leonid Lezner"
+            author={Settings.author}
             Content={post.Content}
             categories={post.frontmatter.categories}
           />

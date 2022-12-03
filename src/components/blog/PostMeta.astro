@@ -1,0 +1,25 @@
+---
+import Categories from "./Categories.astro";
+import DateString from "./DateString.astro";
+
+interface Props {
+  author: string;
+  pubDate: string | undefined;
+  categories: string[];
+}
+
+const { author, categories, pubDate } = Astro.props;
+---
+
+<div class="mb-7 text-gray-600 flex space-x-1 flex-wrap">
+  <div>Gepostet von <span class="font-semibold">{author}</span></div>
+  {
+    categories && (
+      <div>
+        in
+        <Categories categories={categories} />
+      </div>
+    )
+  }
+  {pubDate && <DateString date={new Date(pubDate)} />}
+</div>
