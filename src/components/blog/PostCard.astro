@@ -8,13 +8,14 @@ interface Props {
   categories: string[];
   Content: AstroComponentFactory;
   pubDate?: string | undefined;
+  url: string;
 }
 
-const { title, Content, author, categories, pubDate } = Astro.props;
+const { title, Content, author, categories, pubDate, url } = Astro.props;
 ---
 
 <article class="">
-  <h2 class="text-4xl font-bold mb-7">{title}</h2>
+  <h2 class="text-4xl font-bold mb-7"><a href={url}>{title}</a></h2>
   <PostMeta author={author} categories={categories} pubDate={pubDate} />
   <div class="prose prose-xl max-w-none font-serif"><Content /></div>
 </article>

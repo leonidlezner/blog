@@ -1,0 +1,19 @@
+---
+import Logo from "./Logo.astro";
+const { area } = Astro.props;
+---
+
+<header>
+  <div class="font-serif my-20 flex justify-center">
+    <a href="/home">
+      <div class="flex items-center space-x-3">
+        <img src="/images/logo-simple.svg" class="w-10 h-10" />
+        <div class="text-sm">
+          <div>Blog von Leonid</div>
+          <div>Privater Kram</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div></div>
+</header>

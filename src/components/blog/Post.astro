@@ -1,0 +1,21 @@
+---
+import PostLayout from "../../layouts/PostLayout.astro";
+import PostMeta from "./PostMeta.astro";
+import Settings from "../../settings.json";
+
+const { post, area } = Astro.props;
+---
+
+<PostLayout title={post.frontmatter.title} area={area}>
+  <article class="">
+    <h1 class="text-5xl font-bold mb-14">
+      {post.frontmatter.title}
+    </h1>
+    <PostMeta
+      author={Settings.author}
+      categories={post.frontmatter.categories}
+      pubDate={post.frontmatter.pubDate}
+    />
+    <div class="prose prose-xl max-w-none font-serif"><post.Content /></div>
+  </article>
+</PostLayout>

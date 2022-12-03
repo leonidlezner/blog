@@ -1,11 +1,24 @@
 ---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Settings from "../settings.json";
+
 import "../styles/index.css";
+
+interface Props {
+  title: string;
+  area: string;
+}
+
+const { title, area } = Astro.props;
 ---
 
-<html lang="en">
+<html lang={Settings.language}>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
 
@@ -35,9 +48,11 @@ import "../styles/index.css";
       }
     </style>
 
-    <title>Astro</title>
+    <title>{title}</title>
   </head>
   <body>
+    <Header area={area} />
     <slot />
+    <Footer />
   </body>
 </html>

@@ -2,7 +2,14 @@
 import PostCard from "./PostCard.astro";
 import Settings from "../../settings.json";
 
-const posts = (await Astro.glob("../../posts/*.{md,mdx}")).sort(
+interface Props {
+  posts: Record<string, any>[];
+  path: string;
+}
+
+const { posts, path } = Astro.props;
+
+const sortedPosts: Record<string, any>[] = posts.sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -
     new Date(a.frontmatter.pubDate).valueOf()
@@ -11,8 +18,9 @@ const posts = (await Astro.glob("../../posts/*.{md,mdx}")).sort(
 
 <div class="space-y-24">
   {
-    posts.map((post) => (
+    sortedPosts.map((post) => (
       <PostCard
+        url={`${path}/${post.frontmatter.slug}`}
         title={post.frontmatter.title}
         pubDate={post.frontmatter.pubDate}
         author={Settings.author}
