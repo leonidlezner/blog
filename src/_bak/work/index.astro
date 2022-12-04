@@ -1,5 +1,5 @@
 ---
-import PostListing from "../../components/blog/PostListing.astro";
+import Listing from "../../components/blog/Listing.astro";
 import ListLayout from "../../layouts/ListLayout.astro";
 
 const posts = await Astro.glob("../../posts/work/*.{md,mdx}");
@@ -7,5 +7,5 @@ const nonDraftPosts = posts.filter((post) => !post.frontmatter.draft);
 ---
 
 <ListLayout title="Privater Kram von Leonid" area="work">
-  <PostListing posts={nonDraftPosts} path="/work" />
+  <Listing posts={nonDraftPosts} area="work" />
 </ListLayout>

@@ -1,14 +1,13 @@
 ---
-import PostCard from "./PostCard.astro";
-import Settings from "../../settings.json";
+import Card from "./Card.astro";
 import postExcerpt from "../../utils/post-excerpt.mjs";
 
 interface Props {
   posts: Record<string, any>[];
-  path: string;
+  area: string;
 }
 
-const { posts, path } = Astro.props;
+const { posts, area } = Astro.props;
 
 const sortedPosts: Record<string, any>[] = posts.sort(
   (a, b) =>
@@ -20,14 +19,15 @@ const sortedPosts: Record<string, any>[] = posts.sort(
 <div class="space-y-24">
   {
     sortedPosts.map((post) => (
-      <PostCard
-        url={`${path}/${post.frontmatter.slug}`}
+      <Card
+        url={`/${area}/${post.frontmatter.slug}`}
         title={post.frontmatter.title}
         pubDate={post.frontmatter.pubDate}
         excerpt={postExcerpt(post.compiledContent())}
         Content={post.Content}
         categories={post.frontmatter.categories}
         readingTime={post.frontmatter.readingTime}
+        area={area}
       />
     ))
   }

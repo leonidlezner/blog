@@ -8,9 +8,10 @@ interface Props {
   pubDate: string | undefined;
   categories: string[];
   readingTime: number;
+  area: string;
 }
 
-const { categories, pubDate, readingTime } = Astro.props;
+const { categories, pubDate, readingTime, area } = Astro.props;
 ---
 
 <div class="mb-7 text-gray-600 flex items-center justify-between">
@@ -21,7 +22,7 @@ const { categories, pubDate, readingTime } = Astro.props;
       categories && (
         <div class="mr-1">
           in
-          <Categories categories={categories} />
+          <Categories categories={categories} area={area} />
         </div>
       )
     }

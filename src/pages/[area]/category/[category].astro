@@ -1,0 +1,59 @@
+---
+import Listing from "../../../components/blog/Listing.astro";
+import ListLayout from "../../../layouts/ListLayout.astro";
+import CategoryNames from "../../categories.json";
+
+const area: string = "home";
+
+export async function getStaticPaths() {
+  let categories: string[] = [];
+
+  const loadRoutes = async (area: string) => {
+    let allPosts: any[];
+
+    if (area == "home") {
+      allPosts = await Astro.glob("../../../posts/home/*.{md,mdx}");
+    } else {
+      allPosts = await Astro.glob("../../../posts/work/*.{md,mdx}");
+    }
+
+    const nonDraftPosts = allPosts.filter((post) => !post.frontmatter.draft);
+
+    nonDraftPosts.forEach((post) => {
+      post.frontmatter.categories?.forEach((category: string) => {
+        if (!categories.includes(category)) {
+          categories.push(category);
+        }
+      });
+    });
+  };
+
+  return categories.map((category) => {
+    return {
+      params: {
+        category: `${category}`,
+      },
+    };
+  });
+}
+
+const { category } = Astro.params;
+
+const posts = await Astro.glob("../../../posts/" + area + "/*.{md,mdx}");
+
+const nonDraftPosts = posts.filter(
+  (post) =>
+    post.frontmatter.categories?.includes(category) && !post.frontmatter.draft
+);
+
+let categoryName: string = "";
+
+if (category) {
+  const names = new Map(Object.entries(CategoryNames));
+  categoryName = names.get(category.toString()) ?? category.toString();
+}
+---
+
+<ListLayout title={`Posts in Kategorie "${categoryName}"`} area={area}>
+  <Listing posts={nonDraftPosts} area={area} />
+</ListLayout>

@@ -1,0 +1,31 @@
+---
+import Listing from "../../components/blog/Listing.astro";
+import ListLayout from "../../layouts/ListLayout.astro";
+
+export async function getStaticPaths() {
+  const areas: string[] = ["home", "work"];
+
+  return areas.map((area) => {
+    return { params: { area: area } };
+  });
+}
+
+let { area } = Astro.params;
+
+let posts, title;
+
+if (area == "home") {
+  title = "Privater Kram";
+  posts = await Astro.glob("../../posts/home/*.{md,mdx}");
+} else {
+  title = "Irgendwas mit Arbeit";
+  area = "work";
+  posts = await Astro.glob("../../posts/work/*.{md,mdx}");
+}
+
+const nonDraftPosts = posts.filter((post) => !post.frontmatter.draft);
+---
+
+<ListLayout title={title} area={area}>
+  <Listing posts={nonDraftPosts} area={area} />
+</ListLayout>

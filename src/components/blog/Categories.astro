@@ -1,9 +1,14 @@
 ---
+import CategoryNames from "../../pages/categories.json";
+
 interface Props {
   categories: string[];
+  area: string;
 }
 
-const { categories } = Astro.props;
+const { categories, area } = Astro.props;
+
+const names = new Map(Object.entries(CategoryNames));
 ---
 
 <ul class="comma-list">
@@ -11,10 +16,10 @@ const { categories } = Astro.props;
     categories.map((category: string) => (
       <li>
         <a
-          href="/"
+          href={"/" + area + "/category/" + category}
           class="border-b border-prime -mb-[1px] text-gray-600 hover:bg-prime"
         >
-          {category}
+          {names.get(category) ?? category}
         </a>
       </li>
     ))

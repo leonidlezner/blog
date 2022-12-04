@@ -1,0 +1,38 @@
+---
+import Post from "../../components/blog/Post.astro";
+
+export async function getStaticPaths() {
+  let routes: any[] = [];
+
+  const loadRoutes = async (area: string) => {
+    let allPosts: any[];
+
+    if (area == "home") {
+      allPosts = await Astro.glob("../../posts/home/*.{md,mdx}");
+    } else {
+      allPosts = await Astro.glob("../../posts/work/*.{md,mdx}");
+    }
+
+    const nonDraftPosts = allPosts.filter((post) => !post.frontmatter.draft);
+
+    routes = routes.concat(
+      nonDraftPosts.map((post) => {
+        return {
+          params: { area: area, slug: post.frontmatter.slug },
+          props: { post: post },
+        };
+      })
+    );
+  };
+
+  await loadRoutes("home");
+  await loadRoutes("work");
+
+  return routes;
+}
+
+const { area } = Astro.params;
+const { post } = Astro.props;
+---
+
+<Post post={post} area={area?.toString()} />

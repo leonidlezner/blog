@@ -1,6 +1,6 @@
 ---
 import PostLayout from "../../layouts/PostLayout.astro";
-import PostMeta from "./PostMeta.astro";
+import Meta from "./Meta.astro";
 import Settings from "../../settings.json";
 import ContentContainer from "./ContentContainer.astro";
 
@@ -12,10 +12,11 @@ const { post, area } = Astro.props;
     <h1 class="text-5xl font-bold mb-14">
       {post.frontmatter.title}
     </h1>
-    <PostMeta
+    <Meta
       categories={post.frontmatter.categories}
       pubDate={post.frontmatter.pubDate}
       readingTime={post.frontmatter.readingTime}
+      area={area}
     />
     <ContentContainer>
       <post.Content />
